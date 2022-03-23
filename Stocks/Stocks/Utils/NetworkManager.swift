@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 class NetworkManager <T: Codable>{
-    func fetch(from url: URL, completion: @escaping (Result<T, NetworkError>) -> Void) {
+    func fetch(from url: URL, completion: @escaping (Result<T, NetworkError>) -> Void) { //Closure返回, Result<T, NetworkError>表示成功和失败二选一
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard error == nil else{
                 completion(.failure(.error(err: error!.localizedDescription)))
@@ -36,7 +36,7 @@ class NetworkManager <T: Codable>{
     }
 }
 
-enum NetworkError: Error{
+enum NetworkError: Error{ //define different errors
     case error(err: String)
     case invalidResponse(response: String)
     case invalidData

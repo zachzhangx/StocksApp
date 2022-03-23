@@ -20,10 +20,15 @@ struct NewsListView: View {
                 ForEach(newsManager.newsArticles) {article in
                     VStack(alignment: .leading){
                         HStack(alignment: .top){
-                            Text(article.title)
-                                .bold()
-                                .foregroundColor(.white)
-                                .fixedSize(horizontal: false, vertical: true)
+                            VStack {
+                                Spacer()
+                                Text(article.title)
+                                    .bold()
+                                    .foregroundColor(.white)
+                                    .fixedSize(horizontal: false, vertical: true)
+                                //.background(Color.green)
+                                Spacer()
+                            }
                             Spacer()
                             AsyncImage.init(url: URL(string: article.imageUrl)!){
                                 RoundedRectangle(cornerRadius: 10)
@@ -33,8 +38,9 @@ struct NewsListView: View {
                                     .resizable()
                             }
                             .scaledToFit()
-                            .frame(width: 100, height: 160)
+                            .frame(width: 100, height: 100)
                             .cornerRadius(10)
+                            //.background(Color.blue)
                         }
                         .contentShape(Rectangle())
                         .onTapGesture {
@@ -45,7 +51,7 @@ struct NewsListView: View {
                             loadNews(for: selectedArticle  ?? article)
                         })
 
-                        RoundedRectangle(cornerRadius: 10).fill(Color.white.opacity(0.2))
+                        RoundedRectangle(cornerRadius: 10).fill(Color.white.opacity(0.2)) //Separator line
                             .padding(.horizontal, 50)
                             .frame(height: 1)
                     }

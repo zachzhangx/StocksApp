@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     
     @ObservedObject var mockQuoteManager = MockQuoteManager()
+    @ObservedObject var newsManager = NewsDownloadManager()
     
     @State private var stocks = ["AAPL", "GOOG"]
     @State private var searchTerm = ""
@@ -19,7 +20,7 @@ struct ContentView: View {
     init(){
         UITableView.appearance().separatorStyle = .none
         UITableView.appearance().backgroundColor = .clear
-        UITableView.appearance().backgroundColor = .clear
+        UITableViewCell.appearance().backgroundColor = .clear
     }
     
     var body: some View {
@@ -29,9 +30,9 @@ struct ContentView: View {
             VStack(alignment: .leading) {
                 if newsOpen {
                     withAnimation {
-                        MiniQuoteView(mockQuotes: mockQuoteManager)
+                        MiniQuoteView(mockQuotes: mockQuoteManager)//ScrollView
                             .foregroundColor(.white)
-                            .padding(.top, 50)
+                            .padding(.top, 30)
                             .frame(height: newsOpen ? 100 : 0)
                             .transition(.move(edge: .top)) //move from top edge
                     }
@@ -63,6 +64,9 @@ struct ContentView: View {
             }
             .padding(.horizontal, 32)
             .padding(.bottom, UIScreen.main.bounds.height * 0.21)
+            
+            NewsSheetView(newsOpen: $newsOpen, newsManager: newsManager)
+            
         }.edgesIgnoringSafeArea(.all)
     }
     

@@ -9,10 +9,12 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @ObservedObject var mockQuoteManager = MockQuoteManager()
+    //@ObservedObject var mockQuoteManager = MockQuoteManager()
+    @ObservedObject var stockManager = StockQuoteManager()
     @ObservedObject var newsManager = NewsDownloadManager()
     
-    @State private var stocks = ["AAPL", "GOOG"]
+    //@State private var stocks = ["AAPL", "GOOG"]
+    @State private var stocks = UserDefaultsManager.shared.savedSymbols
     @State private var searchTerm = ""
     @State private var newsOpen = false
     @State private var oldStocks = [String]()
@@ -30,7 +32,7 @@ struct ContentView: View {
             VStack(alignment: .leading) {
                 if newsOpen {
                     withAnimation {
-                        MiniQuoteView(mockQuotes: mockQuoteManager)//ScrollView
+                        MiniQuoteView(stockQuotes: stockManager)//ScrollView
                             .foregroundColor(.white)
                             .padding(.top, 30)
                             .frame(height: newsOpen ? 100 : 0)
@@ -57,7 +59,8 @@ struct ContentView: View {
                     fetchData(for: stocks)
                     oldStocks = stocks
                 }.onChange(of: stocks, perform: { newValue in
-                    
+                    fetchData(for: stocks.difference(from: oldStocks))
+                    oldStocks = stocks
                 })
                 .listStyle(PlainListStyle())
                 .foregroundColor(.white)
@@ -71,13 +74,13 @@ struct ContentView: View {
     }
     
     private func getMockQuotes() -> [Quote] {
-        return searchTerm.isEmpty ? mockQuoteManager.quotes : mockQuoteManager.quotes.filter{
+        return searchTerm.isEmpty ? stockManager.quotes : stockManager.quotes.filter{
             $0.symbol.lowercased().contains(searchTerm.lowercased())
         }
     }
     
     private func fetchData(for symbols: [String]){
-        return mockQuoteManager.download(stocks: symbols) { _ in
+        return stockManager.download(stocks: symbols) { _ in
         
         }
     }

@@ -9,14 +9,14 @@ import SwiftUI
 
 struct MiniQuoteView: View {
     
-    @ObservedObject var mockQuotes: MockQuoteManager
-        //StockQuoteManager
+    @ObservedObject var stockQuotes: StockQuoteManager
+        //MockQuoteManager
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack{
                 //quotes array in MockQuoteManager
-                ForEach(mockQuotes.quotes){
+                ForEach(stockQuotes.quotes){
                     quote in
                     VStack{
                         Text(quote.symbol)
@@ -36,13 +36,13 @@ struct MiniQuoteView: View {
             }
         }
         .onAppear {
-            mockQuotes.download(stocks: [], completion: { _ in })
+            stockQuotes.download(stocks: [], completion: { _ in })
         }
     }
 }
 
 struct MiniQuoteView_Previews: PreviewProvider {
     static var previews: some View {
-        MiniQuoteView(mockQuotes: MockQuoteManager())
+        MiniQuoteView(stockQuotes: StockQuoteManager())
     }
 }

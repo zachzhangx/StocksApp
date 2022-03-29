@@ -27,6 +27,7 @@ struct Quote: Codable{
     }
 }
 
+//ForEach needs a unique id
 extension Quote: Identifiable{
     var id: UUID {
         return UUID()

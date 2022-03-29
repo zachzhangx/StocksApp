@@ -14,8 +14,8 @@ struct News: Identifiable, Codable{
     var title: String
     var url: String
     var urlToImage: String?
-    var imageUrl: String{
+    var imageUrl: String{ //optional urlToImage, show default image if it's nil
         return urlToImage?.replacingOccurrences(of: "http://", with: "https://") ??
-                "https://i.pinimg.com/originals/7b/29/98/7b2898990ae6ce6d6b277113d51b14e8.png"
+                "https://icon-library.com/images/placeholder-image-icon/placeholder-image-icon-19.jpg"
     }
 }

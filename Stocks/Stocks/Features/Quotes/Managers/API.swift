@@ -22,10 +22,12 @@ struct API {
         case quote = "GLOBAL_QUOTE"
     }
     
+    //SYMBOL_SEACH URL
     static func symbolSearchUrl(for searchKey: String) -> String{
         return urlBy(symbol: .search, searchKey: searchKey)
     }
     
+    //GLOBAL_QUOTE URL
     static func quoteUrl(for searchKey: String) -> String{
         return urlBy(symbol: .quote, searchKey: searchKey)
     }

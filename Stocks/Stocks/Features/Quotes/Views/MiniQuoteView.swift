@@ -15,8 +15,8 @@ struct MiniQuoteView: View {
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack{
-                //quotes array in MockQuoteManager
-                ForEach(stockQuotes.quotes){
+                //quotes array in StackQuoteManager
+                ForEach(stockQuotes.quotes){//缩小的Quote
                     quote in
                     VStack{
                         Text(quote.symbol)

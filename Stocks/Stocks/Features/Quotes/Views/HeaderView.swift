@@ -28,13 +28,14 @@ struct HeaderView: View {
                 Text("\(Date(), formatter: dateFormatter)")
                     .foregroundColor(.gray)
                     .bold()
-            }.font(.title)
+            }.font(Font.system(size: 32, design: Font.Design.default))
             
             Spacer()
 
             Button{
-                showSearch.toggle()
+                showSearch.toggle() //toggle SearchView
             }label: {
+                //Button属性
                 Image(systemName: "plus")
                     .font(.title)
                     .foregroundColor(.white)

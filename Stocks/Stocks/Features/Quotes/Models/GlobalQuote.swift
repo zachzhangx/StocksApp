@@ -10,7 +10,7 @@ import Foundation
 struct GlobalQuoteResponse: Codable{
     var quote: Quote
     
-    private enum CodingKeys: String, CodingKey{
+    private enum CodingKeys: String, CodingKey{ //Response "Global Quote" key
         case quote = "Global Quote"
     }
 }

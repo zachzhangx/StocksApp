@@ -8,7 +8,7 @@
 import Foundation
 
 final class SearchManager: ObservableObject {
-    @Published var searches = [Search]()
+    @Published var searches = [Search]() //ObservableObject needed to be observed so use published
     
     func searchStocks(keyword: String){
         NetworkManager<SearchResponse>().fetch(from: URL(string: API.symbolSearchUrl(for: keyword))!){ (result) in

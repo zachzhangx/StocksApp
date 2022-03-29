@@ -32,7 +32,7 @@ struct BottomSheetView<Content: View>: View {
     var indicator: some View{
         RoundedRectangle(cornerRadius: Constants.radius)
             .fill(Color.white.opacity(0.2))
-            .frame(width: Constants.indicatorWidth, height: Constants.indicatorWidth)
+            .frame(width: Constants.indicatorWidth, height: Constants.indicatorHeight)
             .onTapGesture {
                 isOpen.toggle()
             }
@@ -46,7 +46,7 @@ struct BottomSheetView<Content: View>: View {
     }
     
     var body: some View {
-        GeometryReader{ geo in
+        GeometryReader{ geo in //自定义绘制矩形
             VStack(spacing: 0){
                 self.indicator.padding()
                 self.content

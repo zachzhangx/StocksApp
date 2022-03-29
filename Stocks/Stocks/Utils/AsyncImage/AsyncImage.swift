@@ -14,14 +14,14 @@ struct AsyncImage<PlaceholderView:View>: View{
     private let image: (UIImage) -> Image
     
     init(url:URL,@ViewBuilder placeholder: () -> PlaceholderView,
-        @ViewBuilder image: @escaping (UIImage) -> Image = Image.init(uiImage:)){
+        @ViewBuilder image: @escaping (UIImage) -> Image = Image.init(uiImage:)){ //In closure, view accepting multiple subviews as input
         self.placeholder = placeholder()
         self.image = image
         _loader = StateObject(wrappedValue: ImageLoader(url: url, cache: Environment(\.imageCache) as? ImageCache))
     }
     
     private var content: some View{
-        Group{
+        Group{ //Collects multiple instances into a single unit
             if loader.image != nil{
                 image(loader.image!)
             }else{

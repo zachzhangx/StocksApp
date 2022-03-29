@@ -25,8 +25,8 @@ struct QuoteCell: View {
                 Text(quote.price)
                     .bold()
                 Text(quote.change)
-                    .padding(.horizontal)
-                    .frame(width: 100, height: 20)
+                    //.padding(.horizontal)
+                    .frame(width: 100)
                     .background(
                         RoundedRectangle(cornerRadius: 5)
                             .fill(Double(quote.change)! > 0.0 ? Color.green : Color.red),

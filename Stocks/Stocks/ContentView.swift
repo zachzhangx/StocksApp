@@ -49,7 +49,7 @@ struct ContentView: View {
                 List {
                     Group{
                         SearchTextView(searchTerm: $searchTerm)
-                        ForEach(getMockQuotes()){//TableView
+                        ForEach(getQuotes()){//TableView
                             quote in
                             QuoteCell(quote: quote)
                         }
@@ -73,7 +73,7 @@ struct ContentView: View {
         }.edgesIgnoringSafeArea(.all)
     }
     
-    private func getMockQuotes() -> [Quote] {
+    private func getQuotes() -> [Quote] {
         return searchTerm.isEmpty ? stockManager.quotes : stockManager.quotes.filter{
             $0.symbol.lowercased().contains(searchTerm.lowercased())
         }
@@ -81,7 +81,7 @@ struct ContentView: View {
     
     private func fetchData(for symbols: [String]){
         return stockManager.download(stocks: symbols) { _ in
-        
+            
         }
     }
 }

@@ -36,18 +36,15 @@ struct NewsListView: View {
                             }image: { (img) -> Image  in
                                 Image(uiImage: img)
                                     .resizable()
-                            }
-                            .scaledToFit()
+                            }.scaledToFit()
                             .frame(width: 100, height: 100)
                             .cornerRadius(10)
-                            //.background(Color.blue)
-                        }
-                        .contentShape(Rectangle())
+                            
+                        }.contentShape(Rectangle())
                         .onTapGesture {
                             selectedArticle = article
                             showOnSafari.toggle()
-                        }
-                        .sheet(isPresented: $showOnSafari, content: {
+                        }.sheet(isPresented: $showOnSafari, content: {
                             loadNews(for: selectedArticle  ?? article)
                         })
 

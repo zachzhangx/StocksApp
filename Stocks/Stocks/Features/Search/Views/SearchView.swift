@@ -21,7 +21,7 @@ struct SearchView: View {
                     Button(action: {
                         searchManager.searchStocks(keyword: searchTerm)
                     }) {
-                        Image(systemName:"arrowtriangle.right.circle.fill")
+                        Image(systemName:"magnifyingglass.circle.fill")
                             .font(.title)
                             .foregroundColor(.white)
                     }
